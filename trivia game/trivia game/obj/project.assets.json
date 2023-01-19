@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\twirr\\.nuget\\packages\\": {}
+    "C:\\Users\\jesse\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\twirr\\Desktop\\spul\\projects\\pj\\trivia game\\trivia game\\trivia game.csproj",
+      "projectUniqueName": "C:\\Users\\jesse\\Documents\\school 2022\\project\\trivia-game\\trivia game\\trivia game\\trivia game.csproj",
       "projectName": "trivia game",
-      "projectPath": "C:\\Users\\twirr\\Desktop\\spul\\projects\\pj\\trivia game\\trivia game\\trivia game.csproj",
-      "packagesPath": "C:\\Users\\twirr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\twirr\\Desktop\\spul\\projects\\pj\\trivia game\\trivia game\\obj\\",
+      "projectPath": "C:\\Users\\jesse\\Documents\\school 2022\\project\\trivia-game\\trivia game\\trivia game\\trivia game.csproj",
+      "packagesPath": "C:\\Users\\jesse\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jesse\\Documents\\school 2022\\project\\trivia-game\\trivia game\\trivia game\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\twirr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jesse\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
