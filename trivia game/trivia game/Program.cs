@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Reflection;
+using System.Threading;
 
 string[] vragenarray = {"hoe heet de game waarbij je ritmisch gitaar speelt\nop een gitaar met verschillende kleuren knoppen?","hoe heet de twitch streamer die populair is geworden door\nhet spelen van winston in profesioneel overwatch?","welke codeer taal heeft een soort slang als icon?","hoe heet de youtuber die zijn vis het heeft laten opnemen\ntegen wallstreetbets om te zien wie meer winst\nzou maken met het traden van stocks?","waar staat de afkorting PP voor\ndat wordt gebruikt in rhythm games\n om te zien hoeveel punten een song waard is?","hoe heet de band met onder andere de nummers:\nparadise, the scientist en atlas?","benoem het volgende element:\nXe","in welke game speel je als een NB cat persoon\nen is je taak on een lamp naar de be top\nvan een toren te brengen?","wat is de zo gehete powerhouse van een cel?","hoe heet de ziekte waarbij een persoon\nlastig de handen stil kan houden tremoren heeft\nen te weinig dopamine aanmaakt?" };
 List<string> vragenlijst = new List<string>();
 string[] vragenantwoordarray = {"guitar hero","xqc","python","michael reeves","performance points","coldplay","xenon","oneshot","mitochondria","parkinson" };
 List<string> antwoordlijst = new List<string>();
+//standard values//
 int tries = 3;
-string username;
+string username = "A";
+int textspeed = 5;
+//text//
+string currentText = " ";
 
+
+//ascii art//
 string[] topUi = { "--------------------------------------------------------------", "|░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓▓██░░░░░░░░░░░░░░░░░░░░██▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓████░░░░░░░░░░░░░░░░░░████▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓███████░░░░░░░░░░░░░░░░███████▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░███████░░░░░░░░░░███████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░███████░░░░░░░░███████░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░░████████████████████░░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░██████░░████████░░██████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░██████▓▓░░████████░░▓▓██████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░███████▓▓░░████████░░▓▓███████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░▒▒▒███████████▒▒███████████▒▒▒░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▒▒▒▒▒██████████████████████▒▒▒▒▒░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░█▒▒▒████████████████████████▒▒▒█░░░░░░░░░░░░░░|", "--------------------------------------------------------------"};
 string[] bad = { "--------------------------------------------------------------", "|░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓▓██░░░░░░░░░░░░░░░░░░░░██▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓████░░░░░░░░░░░░░░░░░░████▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓███████░░░░░░░░░░░░░░░░███████▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░███████░░░░░░░░░░███████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░███████░░░░░░░░███████░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░░████████████████████░░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░████████████████████████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░████████████████████████████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░██████░░░░░░██████░░░░░░██████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░▒▒▒███████████▒▒███████████▒▒▒░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▒▒▒▒▒██████████████████████▒▒▒▒▒░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░█▒▒▒████████████████████████▒▒▒█░░░░░░░░░░░░░░|", "--------------------------------------------------------------" };
 string[] good = { "--------------------------------------------------------------", "|░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░░░░░░░░░▓▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓▓██░░░░░░░░░░░░░░░░░░░░██▓▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓▓▓████░░░░░░░░░░░░░░░░░░████▓▓▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▓███████░░░░░░░░░░░░░░░░███████▓░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░████████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░███████░░░░░░░░░░░░███████░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░███████░░░░░░░░░░███████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░███████░░░░░░░░███████░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░░░████████████████████░░░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░░░████████████████████████░░░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░░██████░░████████████░░██████░░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░█████░░██░░████████░░██░░█████░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░░▒▒▒███████████▒▒███████████▒▒▒░░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░▒▒▒▒▒██████████████████████▒▒▒▒▒░░░░░░░░░░░░░░|", "|░░░░░░░░░░░░░░█▒▒▒████████████████████████▒▒▒█░░░░░░░░░░░░░░|", "--------------------------------------------------------------" };
@@ -21,13 +29,11 @@ string startup7 = ("████████████████████
 string startup8 = ("██████████████████████████████████████████████████████████████████████████▓╣▒▒▒▒\r\n████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████▓╣▒▒▒▒\r\n████████████████████▓▓▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╢▓▓▓▓▓▓▓███████████████████████\r\n███████████████▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓▓▓██████████████████\r\n█████████████▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓████████████████\r\n███████████▓▓╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████████████\r\n█████████▓▓╣╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╣╣╣╣╣╣╣╣╣╢╫▓████████████\r\n███████▓▓▒╢╣╣╣╣╣╣╣╣╢╢╢▒▒              ▒▒╢╢╢╣╣╣╣╣╢╣╣▒▒▒▒╢╢╣╢╢╢╣╣╣╣╣╣╢╢▓██████████\r\n███████▓▓╣╣╣╣╣╢╢║▒▒````                `░▒╢╢╢╢╢╢▒▒▒▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╣╣╣╢▒▓▓███████\r\n█████▓▓╣╣╣╣╣╣╣╣▒▒`                       `╙▒▒▒▒▒▒▒╢╢╢▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n█████▓╣╣╣╣╣╣╣╣▒▒░                           ░░▒▒▒▒▒▒▒▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███▓▓╢╣╣╣╣╣╣╣╣╢▓▓@▒                           ░▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒▒╢╢╢▓▓▓╢@╥─                          ░▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒░▒▒▒▒░▒╫▓╣▒╥╥╥╖.                        ▒▒╣╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢║╢▒░    `╙╫▓███▓▒                        ░▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ╫▓███▓▒                        ░░▒░░▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒▒▒▒▒▒    ╫▓███▓▒                   ░░▒▒▒▒▒▒▒▒▒▒▒▒╢╢╢╢╢╢╣╣╣╣╣╣╣╣╢▓▓▓██\r\n██▓╣╣╣╣╣╣▒▒ ░▒▒▒░   ╫▓███▓▒                  ]╢▓▓▒░▒▒╢╫▓╣▒▒▒╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣▒▒▒▒▒░    ╫▓███▓▒                ░á▓╢▓╨▒ ░░▒╢▓╢▓╣▒▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ▒▓▓▓▓▓▒                ▒╢▓▒░   ░░░░ ▒▓▓▒░░▒╣▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╣╣▒░                                               ░▒▒▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░,,,,  ,,,                                   ,,,. ,░░░ ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░▒▓▓╣░▒▓▓╣░                                 ,╢▓▓▒░▒▓▓╣░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢▓▓▓╣╨╫▓▓╣╨╜`                  ]╢▓▓▓▓▒░     ░╫▓╣╣╢╫▓▓╣╨╜`░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╢▀╨░ ╨╨╨▒                ░▒▓▓▓▓▓████▌░     ░╨╨╨░ ╨╨╨░   ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒                   ░╖@@@▓▓██████▓▓▓▒░                  ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒▒╖                 ▒╢██████████▓▓▒                   ,╖▒▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒▒,,                └╢▓█████▓▒░                    ,▒╢╢╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓▓╣╣╣╣╣╣╣╢╢╢╣▒░,               `````````                   ░░▒▒╢╣╣╣╣╣╣╣╣╣╢╫▓██\r\n████▓▓╣╣╣╣╣╣╣╣╢╢╢▒░                                     ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓▓████\r\n█████▓╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                                ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣▓█████\r\n█████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                         ░░░░▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n███████▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒╥╥▒░                   ░▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╣╢▒▒                   ░▒╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n██████████▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣▒░░                      ░▒▒╣╣╣╣╣╣╣╣╢╢╣╣╣╣╣╣╢╢▓▓███████\r\n██████████▓╣╣╣╣╣╣▒▒▒▒▒▒▒▒▒▒▒░                    ░▒▒▒▒▒▒▒▒▒▒▒▒▒╢╣╣╣╣╢▓██████████");
 string startup9 = ("██████████████████████████████████████████████████████████████████████████▓╣▒▒▒▒\r\n████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████▓╣▒▒▒▒\r\n████████████████████▓▓▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╢▓▓▓▓▓▓▓███████████████████████\r\n███████████████▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓▓▓██████████████████\r\n█████████████▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓████████████████\r\n███████████▓▓╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████████████\r\n█████████▓▓╣╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╣╣╣╣╣╣╣╣╣╢╫▓████████████\r\n███████▓▓▒╢╣╣╣╣╣╣╣╣╢╢╢▒▒              ▒▒╢╢╢╣╣╣╣╣╢╣╣▒▒▒▒╢╢╣╢╢╢╣╣╣╣╣╣╢╢▓██████████\r\n███████▓▓╣╣╣╣╣╢╢║▒▒````                `░▒╢╢╢╢╢╢▒▒▒▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╣╣╣╢▒▓▓███████\r\n█████▓▓╣╣╣╣╣╣╣╣▒▒`                       `╙▒▒▒▒▒▒▒╢╢╢▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n█████▓╣╣╣╣╣╣╣╣▒▒░                           ░░▒▒▒▒▒▒▒▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███▓▓╢╣╣╣╣╣╣╣╣╢▓▓@▒                           ░▒▒▒▒▒▒▒╢╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒▒╢╢╢▓▓▓╢@╥─                          ░▒▒╢╢╢╣╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒░▒▒▒▒░▒╫▓╣▒╥╥╥╖.               ,,,.     ▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢║╢▒░    `╙╫▓███▓▒              ░▒▒▒░░,,,   ░░▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ╫▓███▓▒                  `░░▒▒▒░░,░▒▒╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒▒▒▒▒▒    ╫▓███▓▒                    ░▒▓▓▓╣▒░░░╜▒▒╢╢╢╢╢╢╣╣╣╣╣╣╣╣╢▓▓▓██\r\n██▓╣╣╣╣╣╣▒▒ ░▒▒▒░   ╫▓███▓▒                  ]▒╫▓▓▓╨▒▒░░░░░░▒▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣▒▒▒▒▒░    ╫▓███▓▒                ░á▓╢▓╣▒▒░  ░░▒╫▓▒░░░░░▒▒╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ▒▓▓▓▓▓▒                ▒╢▓▒▒░░▒░    ▒▓▓▒▒▒▒▒░ ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╣╣▒░                                ░░░░           ░▒▒▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░,,,,  ,,,                         ░▒░░      ,,,. ,░░░ ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░▒▓▓╣░▒▓▓╣░                                 ,╢▓▓▒░▒▓▓╣░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢▓▓▓╣╨╫▓▓╣╨╜`                  ]╢▓▓▓▓▒░     ░╫▓╣╣╢╫▓▓╣╨╜`░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╢▀╨░ ╨╨╨▒                ░▒▓▓▓▓▓████▌░     ░╨╨╨░ ╨╨╨░   ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒                   ░╖@@@▓▓██████▓▓▓▒░                  ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒▒╖                 ▒╢██████████▓▓▒                   ,╖▒▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒▒,,                └╢▓█████▓▒░                    ,▒╢╢╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓▓╣╣╣╣╣╣╣╢╢╢╣▒░,               `````````                   ░░▒▒╢╣╣╣╣╣╣╣╣╣╢╫▓██\r\n████▓▓╣╣╣╣╣╣╣╣╢╢╢▒░                                     ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓▓████\r\n█████▓╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                                ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣▓█████\r\n█████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                         ░░░░▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n███████▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒╥╥▒░                   ░▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╣╢▒▒                   ░▒╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n██████████▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣▒░░                      ░▒▒╣╣╣╣╣╣╣╣╢╢╣╣╣╣╣╣╢╢▓▓███████\r\n██████████▓╣╣╣╣╣╣▒▒▒▒▒▒▒▒▒▒▒░                    ░▒▒▒▒▒▒▒▒▒▒▒▒▒╢╣╣╣╣╢▓██████████");
 string startup10 = ("██████████████████████████████████████████████████████████████████████████▓╣▒▒▒▒\r\n████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████▓╣▒▒▒▒\r\n████████████████████▓▓▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╢▓▓▓▓▓▓▓███████████████████████\r\n███████████████▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓▓▓██████████████████\r\n█████████████▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓████████████████\r\n███████████▓▓╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████████████\r\n█████████▓▓╣╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╣╣╣╣╣╣╣╣╣╢╫▓████████████\r\n███████▓▓▒╢╣╣╣╣╣╣╣╣╢╢╢▒▒              ▒▒╢╢╢╣╣╣╣╣╢╣╣▒▒▒▒╢╢╣╢╢╢╣╣╣╣╣╣╢╢▓██████████\r\n███████▓▓╣╣╣╣╣╢╢║▒▒````                `░▒╢╢╢╢╢╢▒▒▒▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╢╢╢╢╢▓▓███████\r\n█████▓▓╣╣╣╣╣╣╣╣▒▒`                  ░░░  `╙▒▒▒▒▒▒▒╢╢╢▒▒▒▒▒╢╢╢╣╣╣╢╢▒▒▒▒╢╫▓███████\r\n█████▓╣╣╣╣╣╣╣╣▒▒░                   `░░░░░  ░░▒▒▒▒▒▒▒▒▒▒╣╢╣╣╣╣╣╣▒▒▒▒▒╢╢╢▓▓▓█████\r\n███▓▓╢╣╣╣╣╣╣╣╣▒▒░                      ░░░░░  ░▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣▒▒▒▒▒╢╢╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒▒╢╢▒▒░                        ░░░░░, ░▒▒╢╢╢╣╣╣╣╣▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒░▒▒▒▒                           ░░▒░    ▒▒╢╢╢╣╣╣▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢╢▓▒░                                       ░▒╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╫▓█▓▒,                                    ░▒░░░▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒╨╢▓▓▒░                               ,░▒╫▓▓╣▒░░▒▒╢╢╢╢╢╢╣╣╣╣╣╣╣╣╢▓▓▓██\r\n██▓╣╣╣╣╣╣▒▒ ▒╢▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒             ]▒╫╣▒░╨╢▓▓▓▒░ ▒╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣▒▒▒▒╢▓██████████████▓▒           ░á▓╢▓╨▒  ░▒╨▓╢▓╣▒▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒░└╢▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒           ▒╫▓▒░        ▒▓▓▒░▒▒╣▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╣╣▒░                            ,░░▒░            ░░▒▒▒▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░,,,,  ,,,                   ,░▒░░           ,,,. ░▒▒░░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░▒▓▓╣░▒▓▓╣░                ░░░░░░           ,╢▓▓▒░▒▓▓▓▒▒▒╢╢╢╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢▓▓▓╣╨╫▓▓╣╨╜`              ░▒░░▒╢▓▓▓▓▒░     ░╫▓╣╣╢╫▓▓╣╨╜░░▒▒▒╢╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╢▀╨░ ╨╨╨▒                ░╢▓▓▓▓▓████▌░     ░╨╨╨░ ╨╨╨░   ░▒▒╢╢╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒                   ░╖@@@▓▓██████▓▓▓▒░                  ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒▒╖                 ▒╢██████████▓▓▒                   ,╖▒▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒▒,,                └╢▓█████▓▒░                    ,▒╢╢╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓▓╣╣╣╣╣╣╣╢╢╢╣▒░,               `````````                   ░░▒▒╢╣╣╣╣╣╣╣╣╣╢╫▓██\r\n████▓▓╣╣╣╣╣╣╣╣╢╢╢▒░                                     ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓▓████\r\n█████▓╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                                ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣▓█████\r\n█████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                         ░░░░▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n███████▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒╥╥▒░                   ░▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╣╢▒▒                   ░▒╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n██████████▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣▒░░                      ░▒▒╣╣╣╣╣╣╣╣╢╢╣╣╣╣╣╣╢╢▓▓███████\r\n██████████▓╣╣╣╣╣╣▒▒▒▒▒▒▒▒▒▒▒░                    ░▒▒▒▒▒▒▒▒▒▒▒▒▒╢╣╣╣╣╢▓██████████");
-//string startup11 = ("██████████████████████████████████████████████████████████████████████████▓╣▒▒▒▒\r\n████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████▓╣▒▒▒▒\r\n████████████████████▓▓▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╢▓▓▓▓▓▓▓███████████████████████\r\n███████████████▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓▓▓██████████████████\r\n█████████████▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓████████████████\r\n███████████▓▓╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████████████\r\n█████████▓▓╣╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╣╣╣╣╣╣╣╣╣╢╫▓████████████\r\n███████▓▓▒╢╣╣╣╣╣╣╣╣╢╢╢▒▒              ▒▒╢╢╢╣╣╣╣╣╢╣╣▒▒▒▒╢╢╣╢╢╢╣╣╣╣╣╣╢╢▓██████████\r\n███████▓▓╣╣╣╣╣╢╢║▒▒````          ░░░░  `░▒╢╢╢╢╢╢▒▒▒▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╢╢╢▒▒╢▓███████\r\n█████▓▓╣╣╣╣╣╣╣╣▒▒`                `░░░░  `╙▒▒▒▒▒▒▒╢╢╢▒▒▒▒▒╢╢╢╣╣╣╣╣▒▒▒▒▒╫▓███████\r\n█████▓╣╣╣╣╣╣╣╣▒▒░                   `░░     ░░▒▒▒▒▒▒▒▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣▒╢╢╢▓▓▓█████\r\n███▓▓╢╣╣╣╣╣╣╣╣╢▓▓@▒                           ░▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒▒╢╢╢▓▓▓╢@╥─                          ░▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒░▒▒▒▒░▒╫▓╣▒╥╥╥╖.                        ▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢║╢▒░    `╙╫▓███▓▒                          ░▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ╫▓███▓▒                      ,,,,,░`▒╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒▒▒▒▒▒    ╫▓███▓▒                     ▒╫▓▓▓▓▒  ░▒▒╢╢╢╢╢╢╣╣╣╣╣╣╣╣╢▓▓▓██\r\n██▓╣╣╣╣╣╣▒▒ ░▒▒▒░   ╫▓███▓▒                  ]▒╫▓╣▀▀▀╢╫▓▒░ ▒╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣▒▒▒▒▒░    ╫▓███▓▒                ░á▓╢▓╨▒   ░╨▓╢▓╣▒▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ▒▓▓▓▓▓▒                ▒╢▓▒░        ▒▓▓▒░░▒╣▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╣╣▒░                                               ░▒▒▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░,,,,  ,,,                                   ,,,. ,░░░ ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░▒▓▓╣░▒▓▓╣░                                 ,╢▓▓▒░▒▓▓╣░░▒╢╢╢╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢▓▓▓╣╨╫▓▓╣╨╜`              ░▒░ ]╢▓▓▓▓▒░     ░╫▓╣╣╢╫▓▓╣╨╜`░▒▒▒╢╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╢▀╨░ ╨╨╨▒              ,░▒╫▓▓▓▓▓████▌░     ░╨╨╨░ ╨╨╨░   ░▒▒▒▒▒▒╢╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒                   ░╖@▓▓▓▓██████▓▓▓▒░                  ░▒╢▒▒▒╢╢╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒▒╖                 ▒╢██████████▓▓▒                   ,╖▒▒╢╢╢╢╢╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒▒,,                └╢▓█████▓▒░                    ,▒╢╢╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓▓╣╣╣╣╣╣╣╢╢╢╣▒░,               `````````                   ░░▒▒╢╣╣╣╣╣╣╣╣╣╢╫▓██\r\n████▓▓╣╣╣╣╣╣╣╣╢╢╢▒░                                     ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓▓████\r\n█████▓╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                                ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣▓█████\r\n█████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                         ░░░░▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n███████▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒╥╥▒░                   ░▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╣╢▒▒                   ░▒╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n██████████▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣▒░░                      ░▒▒╣╣╣╣╣╣╣╣╢╢╣╣╣╣╣╣╢╢▓▓███████\r\n██████████▓╣╣╣╣╣╣▒▒▒▒▒▒▒▒▒▒▒░                    ░▒▒▒▒▒▒▒▒▒▒▒▒▒╢╣╣╣╣╢▓██████████");
 string startup12 = ("██████████████████████████████████████████████████████████████████████████▓╣▒▒▒▒\r\n████████████████████████████▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓████████████████████████▓╣▒▒▒▒\r\n████████████████████▓▓▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╢▓▓▓▓▓▓▓███████████████████████\r\n███████████████▓▓▓▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓▓▓██████████████████\r\n█████████████▓▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓████████████████\r\n███████████▓▓╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████████████\r\n█████████▓▓╣╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢╣╣╣╣╣╣╣╣╣╢╫▓████████████\r\n███████▓▓▒╢╣╣╣╣╣╣╣╣╢╢╢▒▒              ▒▒╢╢╢╣╣╣╣╣╢╣╣▒▒▒▒╢╢╣╢╢╢╣╣╣╣╣╣╢╢▓██████████\r\n███████▓▓╣╣╣╣╣╢╢║▒▒````                `░▒╢╢╢╢╢╢▒▒▒▒▒╢╢╢▒▒▒▒╢╣╣╣╣╣╣╣╣╢▒▓▓███████\r\n█████▓▓╣╣╣╣╣╣╣╣▒▒`                       `╙▒▒▒▒▒▒▒╢╢╢▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n█████▓╣╣╣╣╣╣╣╣▒▒░                           ░░▒▒▒▒▒▒▒▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███▓▓╢╣╣╣╣╣╣╣╣╢▓▓@▒                           ░▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╣▒▒╢╢╢▓▓▓╢@╥─                          ░▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒░▒▒▒▒░▒╫▓╣▒╥╥╥╖.                        ▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢║╢▒░    `╙╫▓███▓▒                          ░▒╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ╫▓███▓▒                      ,,,,,░`▒╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n██▓╣╣╣╣╣╣▒▒▒▒▒▒▒    ╫▓███▓▒                     ▒╫▓▓▓▓▒  ░▒▒╢╢╢╢╢╢╣╣╣╣╣╣╣╣╢▓▓▓██\r\n██▓╣╣╣╣╣╣▒▒ ░▒▒▒░   ╫▓███▓▒                  ]▒╫▓╣▀▀▀╢╫▓▒░ ▒╢▒▒▒▒╢╣╣╣╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣▒▒▒▒▒░    ╫▓███▓▒                ░á▓╢▓╨▒   ░╨▓╢▓╣▒▒▒▒▒▒▒▒╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒░      ▒▓▓▓▓▓▒                ▒╢▓▒░        ▒▓▓▒░░▒╣▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╣╣▒░                                               ░▒▒▒░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░,,,,  ,,,                                   ,,,. ,░░░ ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒░▒▓▓╣░▒▓▓╣░                                 ,╢▓▓▒░▒▓▓╣░░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢▓▓▓╣╨╫▓▓╣╨╜`                  ]╢▓▓▓▓▒░     ░╫▓╣╣╢╫▓▓╣╨╜`░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╣╢▀╨░ ╨╨╨▒                ░▒▓▓▓▓▓████▌░     ░╨╨╨░ ╨╨╨░   ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒                   ░╖@@@▓▓██████▓▓▓▒░                  ░▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣▒▒▒╖                 ▒╢██████████▓▓▒                   ,╖▒▒╢╣╣╣╣╣╣╣╫▓██\r\n██▓╣╣╣╣╣╣╢╢╢▒▒,,                └╢▓█████▓▒░                    ,▒╢╢╢╢╣╣╣╣╣╣╣╫▓██\r\n██▓▓╣╣╣╣╣╣╣╢╢╢╣▒░,               `````````                   ░░▒▒╢╣╣╣╣╣╣╣╣╣╢╫▓██\r\n████▓▓╣╣╣╣╣╣╣╣╢╢╢▒░                                     ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣▓▓████\r\n█████▓╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                                ░░▒▒▒▒▒╢╢╢╣╣╣╣╣╣╣╣╣╣▓█████\r\n█████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣▒▒▒░                         ░░░░▒▒▒╣╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣▓█████\r\n███████▓▓╣╣╣╣╣╣╣╣╣╣╣╣╣▒▒▒╥╥▒░                   ░▒▒▒▒▒╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╢▓▓▓█████\r\n███████▓▓▓╢╣╣╣╣╣╣╣╣╣╣╣╢╢╢╣╢▒▒                   ░▒╢╢╢╢╢╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╣╫▓███████\r\n██████████▓╣╣╣╣╣╣╣╣╣╣╣╣╣╣▒░░                      ░▒▒╣╣╣╣╣╣╣╣╢╢╣╣╣╣╣╣╢╢▓▓███████\r\n██████████▓╣╣╣╣╣╣▒▒▒▒▒▒▒▒▒▒▒░                    ░▒▒▒▒▒▒▒▒▒▒▒▒▒╢╣╣╣╣╢▓██████████");
 
 string bottomtext = (".___________.____    __    ____  __  .______        ______   ______   .__   __. \r\n|           |\\   \\  /  \\  /   / |  | |   _  \\      /      | /  __  \\  |  \\ |  | \r\n`---|  |----` \\   \\/    \\/   /  |  | |  |_)  |    |  ,----'|  |  |  | |   \\|  | \r\n    |  |       \\            /   |  | |      /     |  |     |  |  |  | |  . `  | \r\n    |  |        \\    /\\    /    |  | |  |\\  \\----.|  `----.|  `--'  | |  |\\   | \r\n    |__|         \\__/  \\__/     |__| | _| `._____| \\______| \\______/  |__| \\__| \r\n                                                                                \r\n\r\n");
 
-string currentText;
-
+//console data//
 Console.WindowHeight = 46;
 Console.WindowWidth = 80;
 Console.BackgroundColor = ConsoleColor.DarkGreen;
@@ -40,10 +46,40 @@ void StartGame()
     vragenlijst = new List<string>(vragenarray);
     antwoordlijst = new List<string>(vragenantwoordarray);
     tries = 3;
-    currentText = ("welcome to this little game, may i ask for your name?\n");
-    DisplayText();
-    username = Console.ReadLine()!.Trim();
-    currentText = ("\nhello " + username + " after this text you will be presented with a few\nquestions and it is up to you to guess the awnser correct.\nfailing to do so will result in your inpending doom.\nGL! <3");
+    Console.Clear();
+    if (username.Length <= 1)
+    {
+        currentText = ("welcome to this little game, may i ask for your name?\n");
+        DisplayText();
+        while (username.Length <= 1)
+        {
+            username = Console.ReadLine()!.Trim();
+            if (username.Length <= 1)
+            {
+                currentText = "sorry that username is too short\n";
+                DisplayText();
+            }
+        }
+    }
+    else
+    {
+        currentText = $"it seems {username} has played in the last game\nbut i'll let you chose a new name.\nyou can type your new name below.\n\n";
+        DisplayText();
+        username = " ";
+    }
+    if (username.Length <= 1)
+    {
+        while (username.Length <= 1)
+        {
+            username = Console.ReadLine()!.Trim();
+            if (username.Length <= 1)
+            {
+                currentText = "sorry that username is too short\n";
+                DisplayText();
+            }
+        }
+    }
+    currentText = ("\nhello " + username + " after this text you will be presented with a few\nquestions and it is up to you to guess the awnser correct.\nafter awnsering a question you have to wait a few seconds\nfailing to do so will result in your inpending doom.\nGL! <3");
     DisplayText();
     Console.ReadLine();
     Console.Clear();
@@ -58,12 +94,12 @@ void StartGame()
         DisplayText();
         Console.ReadLine();
         Console.Clear();
-        StartGame();
+        Menu();
     }
     currentText = ("dat waren alle vragen van deze triva game, goed gedaan\n je kan op enter drukken om opnieuw te spelen");
     DisplayText();
     Console.ReadLine();
-    StartGame();
+    Menu();
 
     void AskQuestion()
     {
@@ -77,7 +113,16 @@ void StartGame()
         
         DisplayText();
         Console.WriteLine($"\n\nuser: {username}\t\t\tremaining lives: {tries}");
-        string antwoord = Console.ReadLine();
+        string antwoord = "a";
+        while (antwoord.Length <= 1)
+        {
+            antwoord = Console.ReadLine()!.Trim();
+            if (antwoord.Length <= 1)
+            {
+                currentText = "sorry that awnser is too short\n";
+                DisplayText();
+            }
+        }
         if (antwoord.ToLower().Equals(antwoordlijst[vraagIndex].ToLower()))
         {
             Console.Clear();
@@ -89,7 +134,7 @@ void StartGame()
             Console.Beep(600, 50);
             Console.Beep(800, 50);
             Console.Beep(1050, 50);
-            Thread.Sleep(2500);
+            Thread.Sleep(1000);
         }
         else
         {
@@ -103,86 +148,330 @@ void StartGame()
             Console.Beep(1000, 50);
             Console.Beep(800,50);
             Console.Beep(600, 50);
-            Thread.Sleep(2500);
+            Thread.Sleep(1000);
         }
         vragenlijst.RemoveAt(vraagIndex);
         antwoordlijst.RemoveAt(vraagIndex);
     }
-
-    void DisplayText()
-    {
-        string str = currentText;
-        char[] chartext = new char[str.Length];
-
-        for (int i = 0; i < chartext.Length; i++)
-        {
-            chartext[i] = str[i];
-        }
-
-        for (int j = 0; j < chartext.Length; j++)
-        {
-            Console.Write(chartext[j]);
-            Thread.Sleep(5);
-            Console.Beep(800,15);
-        }
-    }
 }
+
 void GbaIntro()
 {
-    Console.Clear();
+    Console.WindowHeight = 46;
+    Console.WindowWidth = 80;
+    Console.SetCursorPosition(0,0);
     Console.WriteLine(startup1);
     Console.WriteLine(bottomtext);
-    Console.Beep(250,50);
-    //Thread.Sleep(50);
-    Console.Clear();
+    Console.Beep(250, 25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup2);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(50);
-    Console.Beep(300,50);
-    Console.Clear();
+    Console.Beep(300, 25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup3);
     Console.WriteLine(bottomtext);
-    Console.Beep(350,50);
-    Console.Clear();
+    Console.Beep(350, 25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup4);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep();
     Console.Beep(400, 500);
-    Console.Clear();
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup5);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Clear();
+    Thread.Sleep(25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup6);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Clear();
+    Thread.Sleep(25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup7);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Beep(550, 50);
-    Console.Clear();
+    Thread.Sleep(25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup8);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Beep(700, 50);
-    Console.Clear();
+    Thread.Sleep(25);
+    Console.SetCursorPosition(0, 0);
     Console.WriteLine(startup9);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Clear();
-    Console.WriteLine(startup10);
-    Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Beep(850, 50);
-    Console.Clear();
+    Thread.Sleep(25);
+    Console.Beep(850, 25);
+    Console.SetCursorPosition(0, 0);
+    Console.Beep(1000, 25);
     Console.WriteLine(startup12);
     Console.WriteLine(bottomtext);
-    //Thread.Sleep(100);
-    Console.Beep(1000, 500);
-    Thread.Sleep(1500);
+    Console.Beep(1200, 25);
+    Console.SetCursorPosition(0, 0);
+    Console.WriteLine(startup4);
+    Console.WriteLine(bottomtext);
+    Console.Beep(1450, 500);
+    Thread.Sleep(1000);
     Console.WindowHeight = 28;
     Console.WindowWidth = 62;
     Console.Clear();
-    StartGame();
+    Menu();
+}
+
+void DisplayText()
+{
+    string str = currentText;
+    char[] chartext = new char[str.Length];
+
+    for (int i = 0; i < chartext.Length; i++)
+    {
+        chartext[i] = str[i];
+    }
+    for (int j = 0; j < chartext.Length; j++)
+    {
+        if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
+        {
+            for (j = j; j < chartext.Length; j++)
+            {
+                Console.Write(chartext[j]);
+            }
+            return;
+        }
+        Console.Write(chartext[j]);
+        Thread.Sleep(textspeed);
+        Console.Beep(800, 1);
+    }
+
+}
+
+void Menu()
+{
+    string[] menu = {"playgame\t\t\t\t\t\t*\n","Replay Intro animation\t\t\t\t\t*\n","options\t\t\t\t\t\t\t*\n","exit\t\t\t\t\t\t\t*\n" };
+    int selection = 1;
+    bool menuselect = true;
+    while (menuselect == true)
+    {
+        switch (selection)
+        {
+            case 1:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[1]);
+                Console.WriteLine(menu[2]);
+                Console.WriteLine(menu[3]);
+                select();
+                break;
+            case 2:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[1]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[2]);
+                Console.WriteLine(menu[3]);
+                select();
+                break;
+            case 3:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.WriteLine(menu[1]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[2]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[3]);
+                select();
+                break;
+            case 4:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.WriteLine(menu[1]);
+                Console.WriteLine(menu[2]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[3]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                select();
+                break;
+            default:
+                selection = 1;
+                break;
+        }
+
+        void select()
+        {
+            var Key = Console.ReadKey(true).Key;
+
+            if (Key == ConsoleKey.DownArrow)
+            {
+                selection++;
+            }
+            if (Key == ConsoleKey.UpArrow)
+            {
+                selection--;
+            }
+            if (Key == ConsoleKey.Enter)
+            {
+                switch (selection)
+                {
+                    case 1:
+                        StartGame();
+                        break;
+                    case 2:
+                        GbaIntro();
+                        break;
+                    case 3:
+                        submenu();
+                        break;
+                    case 4:
+                        System.Environment.Exit(0);
+                        break;
+                }
+            }
+        }
+    }
+}
+
+void submenu()
+{
+    string[] menu = {"textspeed\t\t\t\t\t\t*\n","Console color\t\t\t\t\t\t*\n","back\t\t\t\t\t\t\t*\n"};
+    int selection = 1;
+    bool menuselect = true;
+    while (menuselect == true)
+    {
+        switch (selection)
+        {
+            case 1:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[1]);
+                Console.WriteLine(menu[2]);
+                select();
+                break;
+            case 2:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine("not yet implemented\n");
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[2]);
+                select();
+                break;
+            case 3:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.WriteLine(menu[1]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[2]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                select();
+                break;
+            default:
+                selection = 1;
+                break;
+        }
+
+        void select()
+        {
+            var Key = Console.ReadKey(true).Key;
+
+            if (Key == ConsoleKey.DownArrow)
+            {
+                selection++;
+            }
+            if (Key == ConsoleKey.UpArrow)
+            {
+                selection--;
+            }
+            if (Key == ConsoleKey.Enter)
+            {
+                switch (selection)
+                {
+                    case 1:
+                        TextSpeed();
+                        break;
+                    //case 2:
+                        //GbaIntro();
+                       //break;
+                    case 3:
+                        Menu();
+                        selection = 1;
+                        break;
+                }
+            }
+        }
+    }
+}
+
+void TextSpeed()
+{
+    string[] menu = { "slow\t\t\t\t\t\t\t\t\t*\n", "normal\t\t\t\t\t\t\t\t*\n", "fast\t\t\t\t\t\t\t\t*\n","back\t\t\t\t\t\t\t\t*\n"};
+    int selection = 1;
+    bool menuselect = true;
+    currentText = ("\n\nthis a dummy text to see the current textspeed");
+    while (menuselect == true)
+    {
+        switch (selection)
+        {
+            case 1:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[1]);
+                Console.WriteLine (menu[2]);
+                Console.WriteLine (menu[3]);
+                DisplayText();
+                select();
+                break;
+            case 2:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[1]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[2]);
+                Console.WriteLine(menu[3]);
+                DisplayText();
+                select();
+                break;
+            case 3:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.WriteLine(menu[1]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[2]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[3]);
+                DisplayText();
+                select();
+                break;
+            case 4:
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkGreen; Console.WriteLine(menu[0]);
+                Console.WriteLine(menu[1]);
+                Console.WriteLine(menu[2]);
+                Console.BackgroundColor = ConsoleColor.Yellow; Console.WriteLine(menu[3]);
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                select();
+                break;
+            default:
+                selection = 1;
+                break;
+        }
+
+        void select()
+        {
+            var Key = Console.ReadKey(true).Key;
+
+            if (Key == ConsoleKey.DownArrow)
+            {
+                selection++;
+            }
+            if (Key == ConsoleKey.UpArrow)
+            {
+                selection--;
+            }
+            if (Key == ConsoleKey.Enter)
+            {
+                switch (selection)
+                {
+                    case 1:
+                        textspeed = 50;
+                        currentText = ("\n\nthis a dummy text to see the current textspeed");
+                        break;
+                    case 2:
+                        textspeed = 25;
+                        currentText = ("\n\nthis a dummy text to see the current textspeed");
+                        break;
+                    case 3:
+                        textspeed = 5;
+                        currentText = ("\n\nthis a dummy text to see the current textspeed");
+                        break;
+                    case 4:
+                        selection = 1;
+                        submenu();
+                        break;
+                }
+            }
+        }
+    }
 }
