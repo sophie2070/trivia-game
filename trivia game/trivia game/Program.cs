@@ -2,9 +2,9 @@
 using System.Reflection;
 using System.Threading;
 
-string[] vragenarray = {"hoe heet de game waarbij je ritmisch gitaar speelt\nop een gitaar met verschillende kleuren knoppen?","hoe heet de twitch streamer die populair is geworden door\nhet spelen van winston in profesioneel overwatch?","welke codeer taal heeft een soort slang als icon?","hoe heet de youtuber die zijn vis het heeft laten opnemen\ntegen wallstreetbets om te zien wie meer winst\nzou maken met het traden van stocks?","waar staat de afkorting PP voor\ndat wordt gebruikt in rhythm games\n om te zien hoeveel punten een song waard is?","hoe heet de band met onder andere de nummers:\nparadise, the scientist en atlas?","benoem het volgende element:\nXe","in welke game speel je als een NB cat persoon\nen is je taak on een lamp naar de be top\nvan een toren te brengen?","wat is de zo gehete powerhouse van een cel?","hoe heet de ziekte waarbij een persoon\nlastig de handen stil kan houden tremoren heeft\nen te weinig dopamine aanmaakt?" };
+string[] vragenarray = {"hoe heet de game waarbij je ritmisch gitaar speelt\nop een gitaar met verschillende kleuren knoppen?","hoe heet de twitch streamer die populair is geworden door\nhet spelen van winston in profesioneel overwatch?","welke codeer taal heeft een soort slang als icon?","hoe heet de youtuber die zijn vis het heeft laten opnemen\ntegen wallstreetbets om te zien wie meer winst\nzou maken met het traden van stocks?","waar staat de afkorting PP voor\ndat wordt gebruikt in rhythm games\n om te zien hoeveel punten een song waard is?","hoe heet de band met onder andere de nummers:\nparadise, the scientist en atlas?","benoem het volgende element:\nXe","in welke game speel je als een NB cat persoon\nen is je taak on een lamp naar de be top\nvan een toren te brengen?","wat is de zo gehete powerhouse van een cel?","hoe heet de ziekte waarbij een persoon\nlastig de handen stil kan houden tremoren heeft\nen te weinig dopamine aanmaakt?","hoveel is 12 dozijn?", };
 List<string> vragenlijst = new List<string>();
-string[] vragenantwoordarray = {"guitar hero","xqc","python","michael reeves","performance points","coldplay","xenon","oneshot","mitochondria","parkinson" };
+string[] vragenantwoordarray = {"guitar hero","xqc","python","michael reeves","performance points","coldplay","xenon","oneshot","mitochondria","parkinson","144" };
 List<string> antwoordlijst = new List<string>();
 //standard values//
 int tries = 3;
@@ -34,10 +34,9 @@ string startup12 = ("███████████████████�
 string bottomtext = (".___________.____    __    ____  __  .______        ______   ______   .__   __. \r\n|           |\\   \\  /  \\  /   / |  | |   _  \\      /      | /  __  \\  |  \\ |  | \r\n`---|  |----` \\   \\/    \\/   /  |  | |  |_)  |    |  ,----'|  |  |  | |   \\|  | \r\n    |  |       \\            /   |  | |      /     |  |     |  |  |  | |  . `  | \r\n    |  |        \\    /\\    /    |  | |  |\\  \\----.|  `----.|  `--'  | |  |\\   | \r\n    |__|         \\__/  \\__/     |__| | _| `._____| \\______| \\______/  |__| \\__| \r\n                                                                                \r\n\r\n");
 
 //console data//
-Console.WindowHeight = 46;
-Console.WindowWidth = 80;
 Console.BackgroundColor = ConsoleColor.DarkGreen;
 Console.ForegroundColor = ConsoleColor.Black;
+Console.SetWindowSize(30, 40);
 
 GbaIntro();
     

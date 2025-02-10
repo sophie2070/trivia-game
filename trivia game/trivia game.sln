@@ -14,12 +14,15 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		trivia game build|Any CPU = trivia game build|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E10F2289-8CAB-4518-81EF-328D39695E21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E10F2289-8CAB-4518-81EF-328D39695E21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E10F2289-8CAB-4518-81EF-328D39695E21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E10F2289-8CAB-4518-81EF-328D39695E21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E10F2289-8CAB-4518-81EF-328D39695E21}.trivia game build|Any CPU.ActiveCfg = trivia game build|Any CPU
+		{E10F2289-8CAB-4518-81EF-328D39695E21}.trivia game build|Any CPU.Build.0 = trivia game build|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

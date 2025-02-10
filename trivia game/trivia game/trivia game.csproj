@@ -6,6 +6,7 @@
     <RootNamespace>trivia_game</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;trivia game build</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
