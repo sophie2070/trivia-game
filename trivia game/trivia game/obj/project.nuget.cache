@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pyl0YUgf/MRgYZqh14sAuLxPrLbB2lfLPY4ML8b09dnmGCyghzndDAE5bf+5D2/B0VOv0poH18bZTu/nTrt9vQ==",
+  "dgSpecHash": "v9M2re0qS7vfBh7mwerUELDoQMzbj08+2LZJLpBYRslpKHtsj/SUaPzTAsgub3qJKGvl7czpmI8p+SHMaarDOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\twirr\\Documents\\GitHub\\fighting-game\\ggj 2025\\trivia-game\\trivia game\\trivia game\\trivia game.csproj",
+  "projectFilePath": "C:\\Users\\twirr\\Documents\\GitHub\\trivia-game\\trivia game\\trivia game\\trivia game.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\twirr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.23\\microsoft.windowsdesktop.app.ref.6.0.23.nupkg.sha512",
     "C:\\Users\\twirr\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.23\\microsoft.netcore.app.ref.6.0.23.nupkg.sha512",

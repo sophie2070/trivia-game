@@ -373,9 +373,6 @@ void submenu()
                     case 1:
                         TextSpeed();
                         break;
-                    //case 2:
-                        //GbaIntro();
-                       //break;
                     case 3:
                         Menu();
                         selection = 1;

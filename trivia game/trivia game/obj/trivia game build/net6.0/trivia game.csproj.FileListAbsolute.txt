@@ -12,3 +12,17 @@ C:\Users\twirr\Documents\GitHub\fighting-game\ggj 2025\trivia-game\trivia game\t
 C:\Users\twirr\Documents\GitHub\fighting-game\ggj 2025\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.pdb
 C:\Users\twirr\Documents\GitHub\fighting-game\ggj 2025\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.genruntimeconfig.cache
 C:\Users\twirr\Documents\GitHub\fighting-game\ggj 2025\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\ref\trivia game.dll
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\bin\trivia game build\net6.0\trivia game.exe
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\bin\trivia game build\net6.0\trivia game.deps.json
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\bin\trivia game build\net6.0\trivia game.runtimeconfig.json
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\bin\trivia game build\net6.0\trivia game.dll
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\bin\trivia game build\net6.0\trivia game.pdb
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.AssemblyInfoInputs.cache
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.AssemblyInfo.cs
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.csproj.CoreCompileInputs.cache
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.dll
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\refint\trivia game.dll
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.pdb
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\trivia game.genruntimeconfig.cache
+C:\Users\twirr\Documents\GitHub\trivia-game\trivia game\trivia game\obj\trivia game build\net6.0\ref\trivia game.dll
